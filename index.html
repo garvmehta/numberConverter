@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Number System</title>
+	<style type="text/css">
+	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+	body{
+		font-family: 'Poppins', sans-serif;
+	}
+		@media screen and (min-width: 510px) and (max-width: 2500px) {
+
+	#tb{
+			position: relative;
+			top: 150px;
+			width: 380px;
+			height: 350px;
+			background-image: linear-gradient(to bottom,#ddd6f3 , #faaca8);
+			border-radius: 10px;
+			box-shadow: 5px 5px 7px black;
+
+		}
+	select{
+			width: 90%;
+			font-weight: bold;
+			min-height: 40px;
+			max-height: 50px;
+			border-radius: 5px;
+			border:solid black 1px;			
+		}
+		.btn{
+			width: 90%;
+			min-height: 40px;
+			max-height: 50px;
+			border-radius: 5px;
+			border:solid black 1px;
+			font-weight: bold;
+			background-color: white ;
+			transition-property: font-size,color,background-color;
+			transition-duration: 1s;
+			transition-timing-function:ease;
+
+
+		}
+		.btn:hover{
+			color: white;
+			background-color: black;
+			cursor: pointer;
+			font-size: 17px;
+		}
+		#in{
+			width: 95%;
+			min-height: 40px;
+			max-height: 50px;
+			border-radius: 5px;
+			border:solid black 1px;
+			font-size: 25px;
+		}
+	}
+	@media screen and (min-width:300px) and (max-width: 500px){
+		body{
+			margin: 0px;
+			padding: 0px;
+			width: 100%;
+		}
+	#tb{
+			position: relative;
+			top: 150px;
+			width: 80%;
+			height: 40%;
+			background-image: linear-gradient(to bottom,#ddd6f3 , #faaca8);
+			border-radius: 10px;
+			box-shadow: 5px 5px 7px black;
+
+		}
+	select{
+			width: 90%;
+			font-weight: bold;
+			min-height: 30px;
+			max-height: 50px;
+			border-radius: 5px;
+			border:solid black 1px;
+			background-color: white;			
+		}
+		.btn{
+			width: 90%;
+			min-height: 30px;
+			max-height: 40px;
+			border-radius: 5px;
+			border:solid black 1px;
+			font-weight: bold;
+			background-color: white ;
+			transition-property: font-size,color,background-color;
+			transition-duration: 1s;
+			transition-timing-function:ease;
+
+
+		}
+		.btn:hover{
+			color: white;
+			background-color: black;
+			cursor: pointer;
+			font-size: 17px;
+		}
+		#in{
+			width: 95%;
+			min-height: 30px;
+			max-height: 50px;
+			border-radius: 5px;
+			border:solid black 1px;
+			font-size: 20px;
+		}	
+
+		h2{
+			font-size: 18px;
+		}
+	}
+	</style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale =1.0">
+</head>
+<body style="background-color: #666666;">
+	<table id="tb" align="center" >
+		<tr align="center">
+			<td colspan="2"><h2 id="head">Binary to Decimal convert</h2></td>
+		</tr>
+		<tr align="center">
+			<td><label>From</label>
+				<select id="select">
+					<option  value="Decimal">Decimal</option>
+					<option value="Binary">Binary</option>
+					
+				</select>
+			</td>
+			<td><label>To &nbsp;</label>
+				<select id="select2" onclick="call()">
+					<option  value="Decimal">Decimal</option>
+					<option value="Binary">Binary</option>
+					<option value="Hexa Decimal">HexaDecimal</option>
+					<option value="Octal">Octal</option>
+				</select>
+			</td>
+		</tr>
+		<tr align="center">
+			<td colspan="2">
+				<label id="lbl" style="font-weight: bold;">Enter Decimal Number</label>
+				<br>
+				<input type="text"  id="in"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center" ><output type="text" id="output"  style="
+			min-height: 30px; max-height: 50px; border-radius: 5px; border:solid black 1px; font-size: 25px; font-weight: bold; background-color: white;"></output></td>
+		</tr>
+		<tr align="center">
+			<td><button class="btn" onclick="hello()">Convert</button></td>
+			<td><button class="btn" type="reset" onclick="location.reload()">Reset</button></td>
+		</tr>
+		
+	</table>
+	<script type="text/javascript">
+		
+	function call() {
+		//Munipulate Input Heading
+		var one = document.getElementById('select').options.selectedIndex;
+		switch(one){
+			case 0: document.getElementById('lbl').innerHTML="Enter Decimal Number";
+			break;
+			case 1: document.getElementById('lbl').innerHTML="Enter Binary Number";
+			break;
+			
+		}	
+	}
+	//MAIN Function
+	function hello() {
+		var on= document.getElementById('select').options.selectedIndex;
+		var two= document.getElementById('select2').options.selectedIndex;
+		if (on=="0" && two=="1") {
+			//Decimal to Binary
+			var x= document.getElementById('in').value;
+			var bin=0,rem,i=1;
+			document.getElementById('head').innerHTML="Decimal to binary convert";
+			while(x!=0){
+				rem=x%2;
+				x=parseInt(x/2);
+				bin=bin+(rem*i);
+				i=i*10;
+			}
+			document.getElementById('output').value=bin;
+		}
+		else if(on=="0" && two=="2"){
+			//Decimal to HexaDecimal
+			document.getElementById('head').innerHTML="Decimal to HexaDecimal convert";
+
+			var decimal=document.getElementById('in').value;
+			var result=[],i;
+        for (i=decimal;i>0;i=parseInt(i/16)) {
+            result.push(i%16);
+        }
+       
+        for (i=0;i<result.length;i++) {
+            switch(result[i]) {
+                case 10:
+                result[i]="A";
+                break;
+               
+                case 11:
+                result[i]="B";
+                break;
+               
+                case 12:
+                result[i]="C";
+                break;
+               
+                case 13:
+                result[i]="D";
+                break;
+               
+                case 14:
+                result[i]="E";
+                break;
+               
+                case 15:
+                result[i]="F";
+                break;
+            }
+        }
+        decimal=result.reverse().join("");
+        document.getElementById('output').value=decimal;
+
+			}
+
+		
+		else if(on=="0" && two=="3"){
+			//Decimal to Octal
+			document.getElementById('head').innerHTML="Decimal to Octal convert";
+
+			var x= document.getElementById('in').value;
+			var bin=0,rem,i=1;
+			while(x!=0){
+				rem=x%8;
+				x=parseInt(x/8);
+				bin=bin+(rem*i);
+				i=i*10;
+			}
+			document.getElementById('output').value=bin;
+			
+		}
+		else if (on=="1" && two=="0") {
+			//BInary to Decimal
+			document.getElementById('head').innerHTML="Binary to Decimal convert";
+
+			var k= document.getElementById('in').value;
+			var r=0;
+			var i=0;
+			var sum=0;
+			while(k!=0){
+				r=k%10;
+				k=parseInt(k/10);
+				sum =parseInt(sum)+r*Math.pow(2,i);
+				i++;
+			}	
+			document.getElementById('output').value=sum;
+		}
+		else if( on =="1" && two =="3"){
+			//bimnary to Octal 
+				document.getElementById('head').innerHTML="Binary to Octal convert";
+				//binary to decimal
+			var k= document.getElementById('in').value;
+			var r=0;
+			var i=0;
+			var sum=0;
+			while(k!=0){
+				r=k%10;
+				k=parseInt(k/10);
+				sum =parseInt(sum)+r*Math.pow(2,i);
+				i++;
+			}
+			//decimal to octal
+			var bin=0;
+			var i=1;
+			while(sum!=0){
+				rem=sum%8;
+				sum=parseInt(sum/8);
+				bin=bin+(rem*i);
+				i=i*10;
+			}
+			document.getElementById('output').value=bin;
+
+						
+		}
+		else if( on=="1" && two=="2"){
+			//Binary to Hexadecimal
+			document.getElementById('head').innerHTML="Binary to HexaDecimal convert";
+			//binart to Decimal
+			var k= document.getElementById('in').value;
+			var r=0;
+			var i=0;
+			var sum=0;
+			while(k!=0){
+				r=k%10;
+				k=parseInt(k/10);
+				sum =parseInt(sum)+r*Math.pow(2,i);
+				i++;
+			}
+			//decimal to hexa
+
+			var result=[],i;
+        for (i=sum;i>0;i=parseInt(i/16)) {
+            result.push(i%16);
+        }
+       
+        for (i=0;i<result.length;i++) {
+            switch(result[i]) {
+                case 10:
+                result[i]="A";
+                break;
+               
+                case 11:
+                result[i]="B";
+                break;
+               
+                case 12:
+                result[i]="C";
+                break;
+               
+                case 13:
+                result[i]="D";
+                break;
+               
+                case 14:
+                result[i]="E";
+                break;
+               
+                case 15:
+                result[i]="F";
+                break;
+            }
+        }
+        sum=result.reverse().join("");
+        document.getElementById('output').value=sum;
+
+
+		}
+		else if(on=="0" && two=="0"){
+			document.getElementById('head').innerHTML="Decimal to Decimal convert";
+			var r= document.getElementById('in').value;
+			document.getElementById('output').value=r;
+		}
+		else if(on=="1" && two=="1"){
+			document.getElementById('head').innerHTML="Binary to Binary convert";
+			var r= document.getElementById('in').value;
+			document.getElementById('output').value=r;	
+		}
+
+
+		
+	}
+			
+</script>
+</body>
+
+</html>
